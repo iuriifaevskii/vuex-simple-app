@@ -2,18 +2,27 @@
     <div>
         <h1>Article Page</h1>
         <hr>
+        article list
         <div class="flex-container">
-            article list
+            <div class='single-item' :key='post.id' v-for='post in posts'>
+                <div>title: {{post.title}}</div>
+                <div>body: {{post.body}}</div>
+                <div>userId: {{post.userId}}</div>
+                <hr>
+            </div>
         </div>
     </div>
 </template>
 <script>
+import {mapGetters} from 'vuex';
 export default {
-    data() {
-        return {
-        }
+    mounted() {
+        this.$store.dispatch('showPosts');
     },
-    components: {
+    computed: {
+        ...mapGetters([
+            'posts'
+        ])
     },
 }
 </script>
@@ -21,5 +30,6 @@ export default {
 <style>
     .flex-container {
         display: flex;
+        flex-flow: row wrap;
     }
 </style>
