@@ -1,7 +1,9 @@
-import ArticlePage from './components/blog/ArticlePage';
-import CreatePostPage from './components/createPost/CreatePostPage';
-import Home from './components/home/Home';
-import Header from './components/layout/Header';
+import {
+    Blog,
+    CreatePost,
+    Home
+} from './components/pages';
+import Header from './components/layout';
 
 export const routes = [
     { path: '', name: 'routerHome', components: {
@@ -9,11 +11,11 @@ export const routes = [
         'header-top': Header
     } },
     { path: '/article', name: 'allArticles', components: {
-        default: ArticlePage,
+        default: Blog,
         'header-top': Header
     } },
     { path: '/posts', name: 'addArticles', components: {
-        default: CreatePostPage,
+        default: CreatePost,
         'header-top': Header
     } },
     { path: '/redirect-to-articles', redirect: { name: 'allArticles' }},
