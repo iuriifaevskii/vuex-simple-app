@@ -67,6 +67,7 @@ export default {
                 userId: 1
             }
             this.$store.dispatch('createPost', post);
+            this.$router.push({name: 'allArticles'});
         },
     },
 }

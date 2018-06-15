@@ -19,7 +19,7 @@ const mutations = {
 
 const actions = {
     showPosts: ({ commit }) => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
+        fetch('https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts')
             .then(response => response.json())
             .then(json => {
                 commit('showPosts', json)
@@ -27,7 +27,7 @@ const actions = {
             });
     },
     createPost: ({ commit }, payload) => {
-        fetch('https://jsonplaceholder.typicode.com/posts', {
+        fetch('https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts', {
             method: 'POST',
             body: JSON.stringify(payload)
         })
