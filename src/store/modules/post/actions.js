@@ -2,10 +2,19 @@ export const showPosts = ({ commit }) => {
     fetch('https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts')
         .then(response => response.json())
         .then(json => {
-            commit('showPosts', json)
+            commit('showPosts', json);
             return json;
         });
 };
+
+export const showSinglePost = ({ commit }, payload) => {
+    fetch(`https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts/${payload}`)
+        .then(response => response.json())
+        .then(json => {
+            commit('showSinglePost', json);
+            return json;
+        })
+}
 
 export const createPost = ({ commit }, payload) => {
     fetch('https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts', {
