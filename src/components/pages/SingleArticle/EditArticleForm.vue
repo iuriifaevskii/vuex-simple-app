@@ -25,7 +25,6 @@
                 id="category"
                 class="form-control"
                 v-model="articleData.selectedUserId">
-                <option disabled value="">Please select one</option>
                 <option
                     v-for='user in users'
                     :value='user.id'
@@ -52,6 +51,9 @@ export default {
         },
         allUsers: {
             type: Array
+        },
+        ownerPost: {
+            type: Object
         }
     },
     data() {
@@ -59,7 +61,7 @@ export default {
             articleData: {
                 title: this.post.title,
                 body: this.post.body,
-                selectedUserId: null,
+                selectedUserId: this.ownerPost.id,
             },
             users: this.allUsers,
         }

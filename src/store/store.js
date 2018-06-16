@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import post from './modules/post';
 import user from './modules/user';
+import comment from './modules/comment';
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export const store = new Vuex.Store({
     },
     modules: {
         post,
-        user
+        user,
+        comment
     }
 });

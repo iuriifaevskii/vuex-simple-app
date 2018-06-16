@@ -3,12 +3,10 @@
         <div class='flex-row'>
             <h1>Single article page</h1>
             <hr>
-            <h6>user info:</h6>
-            <p>{{ownerPost.name}} {{ownerPost.username}}</p>
-            <p>works for {{ownerPost.company.name}}</p>
-            <br />
-            <h4>{{post.title}}</h4>
-            <p>{{post.body}}</p>
+            <single-article
+                :post='post'
+                :ownerPost='ownerPost'
+            />
             <template v-if='isEdit'>
                 <router-link
                     :to="{ name: 'editArticle', params: { id: post.id }}"
@@ -24,26 +22,37 @@
                     class='btn btn-danger'>
                     close edit
                 </router-link>
+                
             </template>
+            <article-comments
+                :commentsList='getCommentsByPost'
+            />
         </div>
         <router-view
             class='flex-row'
             :post='post'
             :allUsers='getUsers'
+            :ownerPost='ownerPost'
         />
     </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import Article from './Article';
+import ArticleComments from './ArticleComments';
+
 export default {
     mounted() {
         this.$store.dispatch('showUsers');
+        this.$store.dispatch('showSinglePost', this.id);
+        this.$store.dispatch('showCommentsByPost', this.id)
     },
     computed: {
         ...mapGetters([
             'post',
-            'getUsers'
+            'getUsers',
+            'getCommentsByPost'
         ]),
         ownerPost() {
             const user = this.getUsers.find(el => el.id === this.id);
@@ -61,8 +70,9 @@ export default {
             isEdit: this.$route.name !== 'editArticle'
         }
     },
-    mounted() {
-        this.$store.dispatch('showSinglePost', this.id)
+    components: {
+        'single-article': Article,
+        'article-comments': ArticleComments
     }
 }
 </script>
