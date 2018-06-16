@@ -3,10 +3,12 @@
         <div class='flex-row'>
             <h1>Single article page</h1>
             <hr>
-            <p>post id: {{post.id}}</p>
-            <p>userId: {{post.userId}}</p>
-            <p>title: {{post.title}}</p>
-            <p>body: {{post.body}}</p>
+            <h6>user info:</h6>
+            <p>{{ownerPost.name}} {{ownerPost.username}}</p>
+            <p>works for {{ownerPost.company.name}}</p>
+            <br />
+            <h4>{{post.title}}</h4>
+            <p>{{post.body}}</p>
             <template v-if='isEdit'>
                 <router-link
                     :to="{ name: 'editArticle', params: { id: post.id }}"
@@ -27,6 +29,7 @@
         <router-view
             class='flex-row'
             :post='post'
+            :allUsers='getUsers'
         />
     </div>
 </template>
@@ -34,10 +37,18 @@
 <script>
 import {mapGetters} from 'vuex';
 export default {
+    mounted() {
+        this.$store.dispatch('showUsers');
+    },
     computed: {
         ...mapGetters([
-            'post'
-        ])
+            'post',
+            'getUsers'
+        ]),
+        ownerPost() {
+            const user = this.getUsers.find(el => el.id === this.id);
+            return user ? user : {};
+        }
     },
     watch: {
         '$route'(to, from) {

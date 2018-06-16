@@ -1,6 +1,5 @@
 <template>
     <form>
-        {{users}}
         <h1>Create article</h1>
         <hr>
         <div class="form-group">

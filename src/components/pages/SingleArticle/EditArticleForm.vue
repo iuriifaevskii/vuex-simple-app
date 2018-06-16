@@ -24,11 +24,13 @@
             <select 
                 id="category"
                 class="form-control"
-                v-model="articleData.selectedUser">
+                v-model="articleData.selectedUserId">
+                <option disabled value="">Please select one</option>
                 <option
                     v-for='user in users'
-                    :key='user'
-                    >{{user}}
+                    :value='user.id'
+                    :key='user.id'
+                    >{{user.name}}
                 </option>
             </select>
         </div>
@@ -47,6 +49,9 @@ export default {
     props: {
         post: {
             type: Object
+        },
+        allUsers: {
+            type: Array
         }
     },
     data() {
@@ -54,14 +59,9 @@ export default {
             articleData: {
                 title: this.post.title,
                 body: this.post.body,
-                selectedUser: 'test user 1', //post.userId
+                selectedUserId: null,
             },
-            users: [
-                'test user 1',
-                'test user 2',
-                'test user 3',
-                'test user 4',
-            ],
+            users: this.allUsers,
         }
     },
     methods: {
@@ -69,7 +69,7 @@ export default {
             const post = {
                 title: this.articleData.title,
                 body: this.articleData.body,
-                userId: 1,
+                userId: this.articleData.selectedUserId,
                 id: this.post.id
             }
             this.$store.dispatch('editPost', post);
