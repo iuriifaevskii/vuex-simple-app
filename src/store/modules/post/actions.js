@@ -7,13 +7,13 @@ export const showPosts = ({ commit }) => {
         });
 };
 
-export const showSinglePost = ({ commit }, payload) => {
-    fetch(`https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts/${payload}`)
+export const showSinglePost = ({ dispatch, commit }, payload) => {
+    return fetch(`https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts/${payload}`)
         .then(response => response.json())
         .then(json => {
             commit('showSinglePost', json);
-            return json;
-        })
+            return dispatch('showCommentsByPost', payload);
+        });
 }
 
 export const createPost = ({ commit }, payload) => {

@@ -44,9 +44,8 @@ import ArticleComments from './ArticleComments';
 
 export default {
     mounted() {
-        this.$store.dispatch('showUsers');
-        this.$store.dispatch('showSinglePost', this.id);
-        this.$store.dispatch('showCommentsByPost', this.id)
+        this.$store.dispatch('showSinglePost', this.id)
+            .then(() => this.$store.dispatch('showUsers'));
     },
     computed: {
         ...mapGetters([
@@ -55,7 +54,7 @@ export default {
             'getCommentsByPost'
         ]),
         ownerPost() {
-            const user = this.getUsers.find(el => el.id === this.id);
+            const user = this.getUsers.find(el => el.id === +this.id);
             return user ? user : {};
         }
     },
