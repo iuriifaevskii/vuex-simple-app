@@ -1,5 +1,6 @@
 <template>
     <form>
+        {{users}}
         <h1>Create article</h1>
         <hr>
         <div class="form-group">
@@ -24,11 +25,13 @@
             <select 
                 id="category"
                 class="form-control"
-                v-model="articleData.selectedUser">
+                v-model="articleData.selectedUserId">
+                <option disabled value="">Please select one</option>
                 <option
                     v-for='user in users'
-                    :key='user'
-                    >{{user}}
+                    :value='user.id'
+                    :key='user.id'
+                    >{{user.name}}
                 </option>
             </select>
         </div>
@@ -44,19 +47,19 @@
 
 <script>
 export default {
+    props: {
+        allUsers: {
+            type: Array
+        }
+    },
     data() {
         return {
             articleData: {
                 title: '',
                 body: '',
-                selectedUser: 'test user 1',
+                selectedUserId: null,
             },
-            users: [
-                'test user 1',
-                'test user 2',
-                'test user 3',
-                'test user 4',
-            ],
+            users: this.allUsers,
         }
     },
     methods: {
@@ -64,7 +67,7 @@ export default {
             const post = {
                 title: this.articleData.title,
                 body: this.articleData.body,
-                userId: 1
+                userId: this.articleData.selectedUserId
             }
             this.$store.dispatch('createPost', post);
             this.$router.push({name: 'allArticles'});

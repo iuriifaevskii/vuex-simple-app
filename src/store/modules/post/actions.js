@@ -40,7 +40,7 @@ export const editPost = ({ commit }, payload) => {
             id: payload.id,
             title: payload.title,
             body: payload.body,
-            userId: 1
+            userId: payload.userId
         }),
         headers: {
             "Content-type": "application/json; charset=UTF-8"
