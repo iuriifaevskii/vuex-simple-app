@@ -1,3 +1,7 @@
 import SingleArticlePage from './SingleArticlePage';
+import EditArticleForm from './EditArticleForm';
 
-export default SingleArticlePage;
+export {
+    SingleArticlePage,
+    EditArticleForm
+};

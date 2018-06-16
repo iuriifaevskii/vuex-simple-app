@@ -1,11 +1,15 @@
 import Blog from './Blog';
 import CreatePost from './CreatePost';
 import Home from './Home';
-import SingleArticle from './SingleArticle';
+import {
+    SingleArticlePage,
+    EditArticleForm
+} from './SingleArticle';
 
 export {
     Blog,
     CreatePost,
     Home,
-    SingleArticle
+    SingleArticlePage,
+    EditArticleForm
 };

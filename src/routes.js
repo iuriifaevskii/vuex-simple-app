@@ -2,7 +2,8 @@ import {
     Blog,
     CreatePost,
     Home,
-    SingleArticle
+    EditArticleForm,
+    SingleArticlePage
 } from './components/pages';
 import Header from './components/layout';
 
@@ -16,9 +17,11 @@ export const routes = [
         'header-top': Header
     } },
     { path: '/article/:id', name: 'singleArticle', components: {
-        default: SingleArticle,
+        default: SingleArticlePage,
         'header-top': Header
-    } },
+    }, children: [
+        { path: '/article/:id/edit', name: 'editArticle', component: EditArticleForm }
+    ] },
     { path: '/posts', name: 'addArticles', components: {
         default: CreatePost,
         'header-top': Header
