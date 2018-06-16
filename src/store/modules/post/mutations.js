@@ -9,3 +9,7 @@ export const showSinglePost = (state, payload) => {
 export const createPost = (state, payload) => {
     state.posts.unshift(payload);
 };
+
+export const editPost = (state, payload) => {
+    state.post = payload;
+};

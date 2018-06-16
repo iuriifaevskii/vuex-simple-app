@@ -24,7 +24,10 @@
                 </router-link>
             </template>
         </div>
-        <router-view class='flex-row' />
+        <router-view
+            class='flex-row'
+            :post='post'
+        />
     </div>
 </template>
 

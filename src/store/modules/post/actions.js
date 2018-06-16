@@ -32,3 +32,23 @@ export const createPost = ({ commit }, payload) => {
         return json;
     });
 };
+
+export const editPost = ({ commit }, payload) => {
+    fetch(`https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts/${payload.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            id: payload.id,
+            title: payload.title,
+            body: payload.body,
+            userId: 1
+        }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+    .then(response => response.json())
+    .then(editedPostjson => {
+        commit('editPost', editedPostjson);
+        return editedPostjson;
+    })
+};
