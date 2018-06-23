@@ -1,5 +1,7 @@
+import {API_URL} from '../../../common/constants';
+
 export const showPosts = ({ commit }) => {
-    fetch('https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts')
+    fetch(`${API_URL}/posts`)
         .then(response => response.json())
         .then(json => {
             commit('showPosts', json);
@@ -8,7 +10,7 @@ export const showPosts = ({ commit }) => {
 };
 
 export const showSinglePost = ({ dispatch, commit }, payload) => {
-    return fetch(`https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts/${payload}`)
+    return fetch(`${API_URL}/posts/${payload}`)
         .then(response => response.json())
         .then(json => {
             commit('showSinglePost', json);
@@ -17,7 +19,7 @@ export const showSinglePost = ({ dispatch, commit }, payload) => {
 }
 
 export const createPost = ({ commit }, payload) => {
-    fetch('https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts', {
+    fetch(`${API_URL}/posts`, {
         method: 'POST',
         body: JSON.stringify(payload)
     })
@@ -34,7 +36,7 @@ export const createPost = ({ commit }, payload) => {
 };
 
 export const editPost = ({ commit }, payload) => {
-    fetch(`https://my-json-server.typicode.com/iuriifaevskii/my-json-server/posts/${payload.id}`, {
+    fetch(`${API_URL}/posts/${payload.id}`, {
         method: 'PUT',
         body: JSON.stringify({
             id: payload.id,

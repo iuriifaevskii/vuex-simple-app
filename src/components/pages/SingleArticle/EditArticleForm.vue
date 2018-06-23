@@ -39,7 +39,7 @@
                 @click.prevent="submit">
                     Edit Article
             </button>
-        </div>
+        </div>{{post}}
     </form>
 </template>
 
@@ -52,8 +52,8 @@ export default {
         allUsers: {
             type: Array
         },
-        ownerPost: {
-            type: Object
+        selectedId: {
+            type: Number
         }
     },
     data() {
@@ -61,7 +61,7 @@ export default {
             articleData: {
                 title: this.post.title,
                 body: this.post.body,
-                selectedUserId: this.ownerPost.id,
+                selectedUserId: this.selectedId,
             },
             users: this.allUsers,
         }
@@ -79,7 +79,7 @@ export default {
                 name: 'singleArticle',
                 params: {id: this.post.id }
             });
-        },
-    },
+        }
+    }
 }
 </script>

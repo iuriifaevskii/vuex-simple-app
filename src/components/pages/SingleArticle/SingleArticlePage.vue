@@ -5,7 +5,6 @@
             <hr>
             <single-article
                 :post='post'
-                :ownerPost='ownerPost'
             />
             <template v-if='isEdit'>
                 <router-link
@@ -27,12 +26,12 @@
             <article-comments
                 :commentsList='getCommentsByPost'
             />
-        </div>
+        </div>{{post}}
         <router-view
             class='flex-row'
             :post='post'
+            :selectedId='post.userId'
             :allUsers='getUsers'
-            :ownerPost='ownerPost'
         />
     </div>
 </template>
@@ -52,11 +51,7 @@ export default {
             'post',
             'getUsers',
             'getCommentsByPost'
-        ]),
-        ownerPost() {
-            const user = this.getUsers.find(el => el.id === +this.id);
-            return user ? user : {};
-        }
+        ])
     },
     watch: {
         '$route'(to, from) {
